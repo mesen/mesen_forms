@@ -1,0 +1,89 @@
+//= require bootstrap
+//= require bootstrap-responsive
+//= require bootstrap-datepicker
+//= require_tree .
+//= require_self
+
+@import definitions
+
+body
+  font-family: ff-dagny-web-pro, sans-serif
+.navbar-fixed-top
+  margin-bottom: 0
+  background-color: transparent
+  left: 0px
+  margin-bottom: 0px
+  margin-left: 0px
+  margin-right: 0px
+  margin-top: 0px
+  overflow-x: visible
+  overflow-y: visible
+  position: fixed
+  right: 0px
+  top: 0px
+  z-index: 1030
+
+.navbar-inverse .navbar-inner, .navbar .fill
+  background-color: $blue
+  background-image: none
+
+.navbar h3 a, .navbar .brand
+  padding: 10px 20px 10px
+
+.navbar .nav > li > a, .navbar .brand
+  color: $white
+  text-shadow: 0 1px 0 lighten($blue, 5%)
+
+.navbar div > ul .menu-dropdown, .navbar div > ul .dropdown-menu, .nav .menu-dropdown, .nav .dropdown-menu
+  background-color: $blue
+.navbar div > ul .menu-dropdown li a, .navbar div > ul .dropdown-menu li a, .nav .menu-dropdown li a, .nav .dropdown-menu li a 
+  color: $white
+
+.navbar
+  .divider-vertical
+    background-color: $blue
+    border-right: 1px solid #999
+
+.main-content
+  margin-top: 60px
+
+.activity
+  margin-bottom: 1em
+  .credits
+    margin-top: 2px
+    @include smalltext
+
+h3
+  .badge
+    padding-bottom: 0px
+    position: relative
+    top: -2px
+
+.col_title
+  width: 20%
+td.col_updated
+  width: 35%
+td.col_category
+  width: 25%
+td.col_updated,td.col_category,td.col_info
+  @include smalltext
+.col_show,.col_destroy,.col_bool
+  width: 8%
+.col_status
+  width: 10%
+
+.meta-info
+  margin-top: 36px
+
+.event-occurance-editor
+  .form-inline
+    margin-bottom: 10px
+
+.input-xlarge
+  width: 75%
+
+.field_with_errors
+  label
+    color: #B94A48
+footer
+  padding-bottom: 40px
