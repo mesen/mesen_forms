@@ -42,8 +42,7 @@ module MesenForms
         label(attribute, class: 'control-label')+
         controls do
           if(defined?object[attribute] && !object[attribute].blank?)
-            # ::TODO:: make this into a real variable!!! (use attribute instead of the hard-coded 'background_image')
-            @template.image_tag(object.background_image.url(:thumb))
+            @template.image_tag.(object.instance_eval(attribute).url(:thumb))
           end+
           tag('br')+
           file_field(attribute)+
