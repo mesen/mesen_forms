@@ -99,6 +99,8 @@ module MesenForms
         if current_user
           if (defined? object.is_published) && (object.id) && (object.is_published == true)
             pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
+          elsif object.id
+            pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
           else
             pub_btn_txt = I18n.t :publish, :scope => [:layouts, :admin]
           end
@@ -106,9 +108,9 @@ module MesenForms
           c << ' '
           # you can not save a published object as a draft
           if (defined? object.is_published) && ((object.id.nil? == true))
-            c << submit_tag('Lagre som kladd', :name => 'draft', :class => 'btn')
+            c << submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn')
           elsif (defined? object.is_published) && (object.is_published == false) && (object.id.nil? == false)
-            c << submit_tag('Lagre endringer i kladd', :name => 'draft', :class => 'btn')
+            c << submit_tag(I18n.t(:save_changes_in_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn')
           end
           c
         else
