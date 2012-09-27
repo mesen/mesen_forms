@@ -99,7 +99,7 @@ module MesenForms
         if current_user
           if (defined? object.is_published) && (object.id) && (object.is_published == true)
             pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
-          elsif object.id
+          elsif (!defined? object.is_published) && object.id
             pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
           else
             pub_btn_txt = I18n.t :publish, :scope => [:layouts, :admin]
@@ -121,7 +121,7 @@ module MesenForms
           end
           c = submit_tag pub_btn_txt, :name => 'draft', :class => 'btn btn-primary'
         end
-        # c += submit_tag 'Forhåndsvisning', :name => 'preview', :class => 'btn pull-right'
+        # c += submit_tag I18n.t(:preview, :scope => [:layouts, :admin]), :name => 'preview', :class => 'btn pull-right'
       end
     end
   end
