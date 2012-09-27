@@ -65,7 +65,7 @@ module MesenForms
             #  I18n.t(object.class.to_s.underscore, :scope => [:activerecord, :models])
             #end
           #end+
-          link_to_add_fields(I18n.t('Add ' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)
+          @template.link_to_add_fields(I18n.t('Add ' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)
         end
       end
     end
