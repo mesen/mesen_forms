@@ -58,11 +58,10 @@ module MesenForms
         label(attribute, class: 'control-label')+
         controls do
           content_tag :div, :class => 'well fields-wrapper' do
-            fields_for object.instance_eval(attribute) do |field|
-              'Hello'
-              # render(attribute.to_s.singularize + '_fields', :f => field)
+            fields_for object.instance_eval(attribute.to_s) do |field|
+              render(attribute.to_s.singularize + '_fields', :f => field)
             end
-            content_tag :div, :class => ('hidden' if object.instance_eval(attribute).any?) do
+            content_tag :div, :class => ('hidden' if object.instance_eval(attribute.to_s).any?) do
               'no_' + I18n.t(object.class.to_s.underscore, :scope => [:activerecord, :models])
             end
           end
