@@ -57,14 +57,14 @@ module MesenForms
       control_group do
         label(attribute, class: 'control-label')+
         controls do
-          content_tag :div, :class => 'well fields-wrapper' do
+          #content_tag :div, :class => 'well fields-wrapper' do
             #self.fields_for attribute do |field|
             #  @template.render attribute.singularize << '_fields', :f => field
             #end
             #content_tag :div, :class => ('hidden' if object.instance_eval(attribute).any?)
             #  I18n.t(object.class.to_s.underscore, :scope => [:activerecord, :models])
             #end
-          end+
+          #end+
           link_to_add_fields(I18n.t('Add ' + attribute.singularize, :scope => [:layouts, :admin]), self, attribute)
         end
       end
