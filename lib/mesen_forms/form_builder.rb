@@ -62,10 +62,10 @@ module MesenForms
             #   @template.render(attribute.to_s.singularize + '_fields', :f => field)
             # end
             # content_tag :div, :class => ('hidden' if object.instance_eval(attribute).any?)
-            #   'no_' + I18n.t(object.class.to_s.underscore, :scope => [:activerecord, :models])
+            'no_' + I18n.t(object.class.to_s.underscore, :scope => [:activerecord, :models])
             # end
-            @template.link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)
-          end
+          end+
+          @template.link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)
         end
       end
     end
