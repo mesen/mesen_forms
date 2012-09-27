@@ -65,7 +65,7 @@ module MesenForms
             #  'no_' << I18n.t(object.class.to_s.underscore, :scope => [:activerecord, :models]).html_safe
             #end
             tag('br')
-          end
+          end+
           link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)
         end
       end
