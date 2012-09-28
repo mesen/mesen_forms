@@ -58,7 +58,6 @@ module MesenForms
         label(attribute, class: 'control-label')+
         controls do
           content_tag(:div, :class => 'well fields-wrapper') do
-            puts object.attributes
             fields_for(attribute) do |field|
               render(attribute.to_s.singularize + '_fields', :f => field)
             end+

@@ -72,7 +72,7 @@ class NestedForm
       nested_form.set_directional_button_ability(fields_wrapper)
       nested_form.set_order_num(fields_wrapper)
       if num_fields < 1
-        fields_wrapper.find('.empty-list').show()
+        fields_wrapper.find('.empty-list').css({visibility: 'visible', display: 'block'}).show()
       event.preventDefault()
     )
 
