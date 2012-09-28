@@ -58,10 +58,10 @@ module MesenForms
         label(attribute, class: 'control-label')+
         controls do
           content_tag(:div, :class => 'well fields-wrapper') do
-            fields_for(attribute, object) do |field|
-              puts field
-              render(attribute.to_s.singularize + '_fields', :f => field)
-            end
+            #fields_for(attribute, object) do |field|
+            #  puts field
+            #  render(attribute.to_s.singularize + '_fields', :f => field)
+            #end
             content_tag(:div, I18n.t("no_" + object.class.name.to_s.downcase, :scope => [:layouts, :admin]).html_safe, class: ('hidden' if object.instance_eval(attribute.to_s).any?))
           end+
           link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)
