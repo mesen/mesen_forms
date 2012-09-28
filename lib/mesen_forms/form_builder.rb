@@ -58,7 +58,7 @@ module MesenForms
         label(attribute, class: 'control-label')+
         controls do
           content_tag(:div, :class => 'well fields-wrapper') do
-            fields_for(object.send(attribute)) do |field|
+            fields_for(object.media_files) do |field|
               render(attribute.to_s.singularize + '_fields', :f => field)
             end
             content_tag(:div, I18n.t("no_" + attribute.to_s, :scope => [:layouts, :admin]).html_safe, class: ('hidden' if object.instance_eval(attribute.to_s).any?))
