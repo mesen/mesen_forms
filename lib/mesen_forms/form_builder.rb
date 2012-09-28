@@ -59,6 +59,7 @@ module MesenForms
         controls do
           content_tag(:div, :class => 'well fields-wrapper') do
             fields_for(attribute, object) do |field|
+              puts field
               render(attribute.to_s.singularize + '_fields', :f => field)
             end
             content_tag(:div, I18n.t("no_" + object.class.name.to_s.downcase, :scope => [:layouts, :admin]).html_safe, class: ('hidden' if object.instance_eval(attribute.to_s).any?))
