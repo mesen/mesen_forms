@@ -54,7 +54,7 @@ module MesenForms
             content_tag(:td, I18n.t(:created, :scope => [:layouts, :admin])) +
             content_tag(:td, create_info(object))
           end+
-          if options[:object_path]
+          if object.respond_to?(options[:object_path])
             content_tag(:tr) do
               content_tag(:td, I18n.t(:address, :scope => [:layouts, :admin]))+
               content_tag(:td, link_to(options[:object_path], options[:object_path], :target => '_blank'))
