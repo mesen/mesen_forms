@@ -41,7 +41,7 @@ module MesenForms
         options.reverse_merge!({:show_delete => true,
                                 :title_column => 'title',
                                 :admin_path => url_for([:admin, object]),
-                                :object_path => object.slug == 'forsiden' ? '/' : url_for(object),
+                                :object_path => object.slug == 'forsiden' ? '/' : (object.respond_to?(url_for(object)) ? url_for(object) : false),
                                 :objects_string => I18n.t(object.class.name.underscore.pluralize, :scope => [:activerecord,:models]),
                                 :edit_path => url_for([:admin, object.class])})
   
@@ -54,7 +54,7 @@ module MesenForms
             content_tag(:td, I18n.t(:created, :scope => [:layouts, :admin])) +
             content_tag(:td, create_info(object))
           end+
-          if object.respond_to?(options[:object_path])
+          if options[:object_path]
             content_tag(:tr) do
               content_tag(:td, I18n.t(:address, :scope => [:layouts, :admin]))+
               content_tag(:td, link_to(options[:object_path], options[:object_path], :target => '_blank'))
