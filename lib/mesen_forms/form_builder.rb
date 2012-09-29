@@ -115,6 +115,8 @@ module MesenForms
             pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
           elsif (!defined? object.is_published) && object.id
             pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
+          elsif (!defined? object.is_published) && !object.id
+            pub_btn_txt = I18n.t :create, :scope => [:layouts, :admin]
           else
             pub_btn_txt = I18n.t :publish, :scope => [:layouts, :admin]
           end
