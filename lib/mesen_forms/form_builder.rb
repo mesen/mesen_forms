@@ -42,7 +42,7 @@ module MesenForms
         label(attribute, class: 'control-label')+
         controls do
           if(defined?object[attribute] && !object[attribute].blank?)
-            @template.image_tag(object.instance_eval(attribute).url(:thumb))
+            @template.image_tag(object.instance_eval(attribute.to_s).url(:thumb))
           end+
           tag('br')+
           file_field(attribute)+
