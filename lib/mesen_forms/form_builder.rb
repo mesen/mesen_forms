@@ -41,7 +41,7 @@ module MesenForms
       control_group do
         label(attribute, class: 'control-label')+
         controls do
-          if(defined?object[attribute] && !object[attribute].blank?)
+          if(defined?object.instance_eval(attribute.to_s) && !object.instance_eval(attribute.to_s).blank?)
             @template.image_tag(object.instance_eval(attribute.to_s).url(:thumb))
           end+
           tag('br')+
@@ -63,7 +63,10 @@ module MesenForms
             end+
             content_tag(:div, I18n.t("no_" + attribute.to_s, :scope => [:layouts, :admin]).html_safe, class: ('hidden' if object.instance_eval(attribute.to_s).any?))
           end+
-          link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)
+          link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)+
+          if options[:help]
+            help_block options[:help]
+          end
         end
       end
     end
