@@ -141,4 +141,111 @@ module MesenForms
       end
     end
   end
+
+  def localized_text_field(attribute, options={})
+    default_attr  = attribute.to_s<<'_'<<I18n.default_locale.to_s
+    locales       = ['en','de']
+    active_locale = 'en'    
+    control_group do
+      label(default_attr, class: 'control-label')+
+      controls do
+        tabbable('pull-right') do
+          locale_tab_links(attribute, locales, active_locale)+
+          locale_tab_text_fields(attribute, locales, active_locale, options)
+        end+
+        text_field(default_attr.to_sym, :class => 'input-large', :skip_label => true)+
+        if options[:help]
+          help_block options[:help]
+        end
+      end
+    end
+  end
+
+  def locale_tab_text_fields attr_base, locales, active_locale, options
+    content_tag :div, class: 'tab-content' do
+      locales.map do |locale|
+        unless locale == I18n.default_locale
+          locale_tab_text_field attr_base, locale, (true if active_locale == locale), options
+        end
+      end.join.html_safe
+    end
+  end
+
+  def locale_tab_text_field attr_base, locale, active = false, options
+    attribute = attr_base.to_s + '_' + locale
+    dom_class = 'tab-pane'<< (active ? ' active' : '')
+    content_tag :div, class: dom_class, id: 'pane_'+attribute do
+      text_field(attribute.to_sym, :class => 'input-large', :skip_label => true)
+    end
+  end
+
+  def localized_text_area(attribute, options={})
+    default_attr  = attribute.to_s<<'_'<<I18n.default_locale.to_s
+    locales       = ['en','de']
+    active_locale = 'en'
+    control_group do
+      label(default_attr, class: 'control-label')+
+      controls do
+        tabbable('pull-right') do
+          locale_tab_links(attribute, locales, active_locale)+
+          locale_tab_text_areas(attribute, locales, active_locale, options)
+        end+
+        if options[:cktext]
+          cktext_area(default_attr.to_sym, :rows => (options[:rows] ?  options[:rows] : 5), :toolbar => options[:cktext], :width => 322, :height => (options[:height] ? options[:height] : 200), :js_content_for => :ckeditor_js)
+        else
+          text_area(default_attr.to_sym, :rows => (options[:rows] ?  options[:rows] : 5), :class => 'input-large', :skip_label => true)
+        end+
+        if options[:help]
+          help_block options[:help]
+        end
+      end
+    end
+  end
+
+  def tabbable align_class = nil
+    content_tag(:div, class: 'tabbable tabs-right ' << align_class.to_s) do
+      yield
+    end
+  end
+
+  def locale_tab_links attr_base, locales, active_locale
+    content_tag :ul, class: 'nav nav-tabs' do
+      locales.map do |locale|
+        unless locale == I18n.default_locale
+          locale_tab_link(attr_base, locale, (true if active_locale == locale))
+        end
+      end.join.html_safe
+    end
+  end
+
+  def locale_tab_link attr_base, locale, active = false
+    locale_link = '#pane_'+attr_base.to_s+'_'+locale
+    content_tag :li, class: ('active' if active) do
+      content_tag :a, href: locale_link, data: {:toggle => 'tab'} do
+        I18n.t locale.to_sym, :scope => [:layouts, :admin]
+      end
+    end
+  end 
+
+  def locale_tab_text_areas attr_base, locales, active_locale, options
+    content_tag :div, class: 'tab-content' do
+      locales.map do |locale|
+        unless locale == I18n.default_locale
+          locale_tab_text_area attr_base, locale, (true if active_locale == locale), options
+        end
+      end.join.html_safe
+    end
+  end
+
+  def locale_tab_text_area attr_base, locale, active = false, options
+    attribute = attr_base.to_s + '_' + locale
+    dom_class = 'tab-pane'<< (active ? ' active' : '')
+    content_tag :div, class: dom_class, id: 'pane_'+attribute do
+      if options[:cktext]
+        cktext_area(attribute.to_sym, :toolbar => options[:cktext], :rows => (options[:rows] ?  options[:rows] : 5), :width => 322, :height => (options[:height] ? options[:height] : 200), :js_content_for => :ckeditor_js)
+      else
+        text_area attribute.to_sym, :rows => (options[:rows] ?  options[:rows] : 5), :class => 'input-large', :skip_label => true
+      end
+    end
+  end
 end
