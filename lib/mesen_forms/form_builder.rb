@@ -140,7 +140,6 @@ module MesenForms
         # c += submit_tag I18n.t(:preview, :scope => [:layouts, :admin]), :name => 'preview', :class => 'btn pull-right'
       end
     end
-  end
 
   def localized_text_field(attribute, options={})
     default_attr  = attribute.to_s<<'_'<<I18n.default_locale.to_s
@@ -248,4 +247,5 @@ module MesenForms
       end
     end
   end
+end
 end
