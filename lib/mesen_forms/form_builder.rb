@@ -4,9 +4,9 @@ module MesenForms
     
     %w[text_area text_field email_field url_field password_field collection_select].each do |method_name|
       define_method(method_name) do |attribute, *options|
-        old_opts = options
+        *old_opts = *options
         puts "---------------"
-        puts old_opts
+        puts *old_opts
         puts "---------------"
         opts = options.extract_options!
         if opts[:skip_label]
