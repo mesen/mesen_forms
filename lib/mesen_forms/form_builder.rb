@@ -14,7 +14,8 @@ module MesenForms
               if method_name == 'text_area' && opts[:cktext]
                 cktext_area(attribute.to_sym, :toolbar => opts[:cktext], :rows => (opts[:rows] ?  opts[:rows] : 5), :width => 322, :height => (opts[:height] ? opts[:height] : 200), :js_content_for => :ckeditor_js)
               else
-                super(attribute, *opts)
+                puts options
+                super(attribute, *options)
               end+
               if opts[:help]
                 help_block opts[:help]
