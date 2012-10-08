@@ -4,12 +4,13 @@ module MesenForms
     
     %w[text_area text_field email_field url_field password_field collection_select].each do |method_name|
       define_method(method_name) do |attribute, *options|
+        old_opts = options
         puts "---------------"
-        puts options
+        puts old_opts
         puts "---------------"
         opts = options.extract_options!
         if opts[:skip_label]
-          super(attribute, *options)
+          super(attribute, *old_opts)
         else
           control_group do
             label(attribute, class: 'control-label')+
@@ -18,9 +19,9 @@ module MesenForms
                 cktext_area(attribute.to_sym, :toolbar => opts[:cktext], :rows => (opts[:rows] ?  opts[:rows] : 5), :width => 322, :height => (opts[:height] ? opts[:height] : 200), :js_content_for => :ckeditor_js)
               else
                 puts '*************'
-                puts options
+                puts old_opts
                 puts '*************'
-                super(attribute, *options)
+                super(attribute, *old_opts)
               end+
               if opts[:help]
                 help_block opts[:help]
