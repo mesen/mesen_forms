@@ -4,6 +4,9 @@ module MesenForms
     
     %w[text_area text_field email_field url_field password_field collection_select].each do |method_name|
       define_method(method_name) do |attribute, *options|
+        puts "---------------"
+        puts options
+        puts "---------------"
         opts = options.extract_options!
         if opts[:skip_label]
           super(attribute, *options)
@@ -14,7 +17,9 @@ module MesenForms
               if method_name == 'text_area' && opts[:cktext]
                 cktext_area(attribute.to_sym, :toolbar => opts[:cktext], :rows => (opts[:rows] ?  opts[:rows] : 5), :width => 322, :height => (opts[:height] ? opts[:height] : 200), :js_content_for => :ckeditor_js)
               else
+                puts '*************'
                 puts options
+                puts '*************'
                 super(attribute, *options)
               end+
               if opts[:help]
