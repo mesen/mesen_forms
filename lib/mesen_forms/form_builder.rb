@@ -5,9 +5,6 @@ module MesenForms
     %w[text_area text_field email_field url_field password_field collection_select].each do |method_name|
       define_method(method_name) do |attribute, *options|
         *old_opts = *options
-        puts "---------------"
-        puts *old_opts
-        puts "---------------"
         opts = options.extract_options!
         if opts[:skip_label]
           super(attribute, *old_opts)
@@ -18,9 +15,6 @@ module MesenForms
               if method_name == 'text_area' && opts[:cktext]
                 cktext_area(attribute.to_sym, :toolbar => opts[:cktext], :rows => (opts[:rows] ?  opts[:rows] : 5), :width => 322, :height => (opts[:height] ? opts[:height] : 200), :js_content_for => :ckeditor_js)
               else
-                puts '*************'
-                puts old_opts
-                puts '*************'
                 super(attribute, *old_opts)
               end+
               if opts[:help]
@@ -183,7 +177,7 @@ module MesenForms
   def locale_tab_text_field attr_base, locale, active = false, options
     attribute = attr_base.to_s + '_' + locale
     dom_class = 'tab-pane'<< (active ? ' active' : '')
-    content_tag :div, class: dom_class, id: 'pane_'+attribute do
+    content_tag :div, class: dom_class, id: 'pane_'+object.class.name.downcase+'_'+attribute do
       text_field(attribute.to_sym, :class => 'input-large', :skip_label => true)
     end
   end
@@ -228,7 +222,8 @@ module MesenForms
   end
 
   def locale_tab_link attr_base, locale, active = false
-    locale_link = '#pane_'+attr_base.to_s+'_'+locale
+    locale_link = '#pane_'+object.class.name.downcase+'_'+attr_base.to_s+locale
+    
     content_tag :li, class: ('active' if active) do
       content_tag :a, href: locale_link, data: {:toggle => 'tab'} do
         I18n.t locale.to_sym, :scope => [:layouts, :admin]
@@ -249,7 +244,7 @@ module MesenForms
   def locale_tab_text_area attr_base, locale, active = false, options
     attribute = attr_base.to_s + '_' + locale
     dom_class = 'tab-pane'<< (active ? ' active' : '')
-    content_tag :div, class: dom_class, id: 'pane_'+attribute do
+    content_tag :div, class: dom_class, id: 'pane_'+object.class.name.downcase+'_'+attribute do
       if options[:cktext]
         cktext_area(attribute.to_sym, :toolbar => options[:cktext], :rows => (options[:rows] ?  options[:rows] : 5), :width => 322, :height => (options[:height] ? options[:height] : 200), :js_content_for => :ckeditor_js)
       else
