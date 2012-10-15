@@ -222,8 +222,8 @@ module MesenForms
   end
 
   def locale_tab_link attr_base, locale, active = false
-    locale_link = '#pane_'+object.class.name.downcase+'_'+attr_base.to_s+locale
-    
+    locale_link = '#pane_'+object.class.name.downcase+'_'+attr_base.to_s+'_'+locale+'_'+object.id.to_s
+
     content_tag :li, class: ('active' if active) do
       content_tag :a, href: locale_link, data: {:toggle => 'tab'} do
         I18n.t locale.to_sym, :scope => [:layouts, :admin]
@@ -244,7 +244,7 @@ module MesenForms
   def locale_tab_text_area attr_base, locale, active = false, options
     attribute = attr_base.to_s + '_' + locale
     dom_class = 'tab-pane'<< (active ? ' active' : '')
-    content_tag :div, class: dom_class, id: 'pane_'+object.class.name.downcase+'_'+attribute do
+    content_tag :div, class: dom_class, id: 'pane_'+object.class.name.downcase+'_'+attribute+'_'+object.id.to_s do
       if options[:cktext]
         cktext_area(attribute.to_sym, :toolbar => options[:cktext], :rows => (options[:rows] ?  options[:rows] : 5), :width => 322, :height => (options[:height] ? options[:height] : 200), :js_content_for => :ckeditor_js)
       else
