@@ -177,7 +177,7 @@ module MesenForms
   def locale_tab_text_field attr_base, locale, active = false, options
     attribute = attr_base.to_s + '_' + locale
     dom_class = 'tab-pane'<< (active ? ' active' : '')
-    content_tag :div, class: dom_class, id: 'pane_'+object.class.name.downcase+'_'+attribute do
+    content_tag :div, class: dom_class, id: 'pane_'+object.class.name.downcase+'_'+attribute + '_'+object.id.to_s do
       text_field(attribute.to_sym, :class => 'input-large', :skip_label => true)
     end
   end
