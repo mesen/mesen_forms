@@ -9,7 +9,7 @@ $(document).ready(
     window.bind_processing()
 
   # bind the loader message
-  $('.btn').on('click', () ->
+  $('.form-actions').find('.btn').on('click', () ->
     $(this).button('loading')
   )
 )
