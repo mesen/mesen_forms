@@ -74,6 +74,20 @@ module MesenForms
       end
     end
 
+    def check_box(attribute, options={})
+      control_group do
+        label(attribute, class: 'control-label')+
+        controls do
+          content_tag(:label, :class => 'checkbox') do
+            super+
+            options[:longdesc]
+          end+
+          if options[:help]
+            help_block options[:help]
+          end
+      end
+    end
+
     def datetime_select(attribute, options={})
       control_group do
         label(attribute, class: 'control-label')+
