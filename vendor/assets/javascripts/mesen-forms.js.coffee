@@ -1,4 +1,4 @@
-//= require bootstrap.min
+//= require bootstrap
 //= require bootstrap-datepicker
 //= require nested-form
 //= require image-processing
