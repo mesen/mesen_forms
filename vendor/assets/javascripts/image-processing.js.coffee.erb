@@ -1,0 +1,18 @@
+window.bind_processing = () ->
+  window.intervals = {}
+  $('.processing').each(()->
+    thumb_url = $(this).find('img').attr('src')
+    $(this).find('img').attr('src', '<%= asset_path 'loader-anim.gif' %>')
+    obj_id = $(this).attr('data-id')
+    klass_pluralized = $(this).attr('data-path')
+    poll_url = '/admin/'+ klass_pluralized + '/' + obj_id + '.json'
+    window.intervals[klass_pluralized + '_' + obj_id] = setInterval(window.check_processing,2000, thumb_url, poll_url, obj_id, klass_pluralized)
+  )
+
+window.check_processing = (thumb_url, poll_url, obj_id, klass_pluralized) ->
+  $.getJSON(poll_url, (data) ->
+    if !data
+      clearInterval(window.intervals[klass_pluralized + '_' + obj_id])
+      d = new Date()
+      $('#' + klass_pluralized + '-' + obj_id).find('img').attr('src', thumb_url + '?' + d.getTime())
+  )
