@@ -85,6 +85,7 @@ module MesenForms
           if options[:help]
             help_block options[:help]
           end
+        end
       end
     end
 
