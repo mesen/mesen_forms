@@ -43,7 +43,7 @@ module MesenForms
         label(attribute, class: 'control-label')+
         controls do
           if(defined?object.instance_eval(attribute.to_s) && !object.instance_eval(attribute.to_s).blank?)
-            content_tag(:div, class: 'image-thumb ' + ('processing' if defined?object.image_processing && object.image_processing), data: {:id => object.id, :path => object.class.name.tableize}) do
+            content_tag(:div, class: 'image-thumb ' + ('processing' if defined?object.instance_eval(attribute.to_s + '_processing') && !object.instance_eval(attribute.to_s + '_processing').blank?), data: {:id => object.id, :path => object.class.name.tableize}) do
               @template.image_tag(object.instance_eval(attribute.to_s).url(:thumb))
             end
           end+
