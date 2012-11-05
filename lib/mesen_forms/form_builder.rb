@@ -101,6 +101,18 @@ module MesenForms
       end
     end
 
+    def date_select(attribute, options={})
+      control_group do
+        label(attribute, class: 'control-label')+
+        controls do
+          super+
+          if options[:help]
+            help_block options[:help]
+          end
+        end
+      end
+    end
+
     def map_input(attribute, options={})
       control_group do
         label(attribute, class: 'control-label')+
