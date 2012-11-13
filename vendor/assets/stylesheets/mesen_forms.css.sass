@@ -89,3 +89,69 @@ td.col_updated,td.col_category,td.col_info
     color: #B94A48
 footer
   padding-bottom: 40px
+
+
+
+
+body
+  background-color: #fefeff
+
+.btn-primary
+  background-color: $blue
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($darkblue), to($blue))
+  background-image: -webkit-linear-gradient(top, $blue, $darkblue)
+  background-image: -o-linear-gradient(top, $blue, $darkblue)
+  background-image: linear-gradient(to bottom, $blue, $darkblue)
+  background-image: -moz-linear-gradient(top, $blue, $darkblue)
+  background-repeat: repeat-x
+  &:active
+    background-image: none
+    background-color: $blue
+  &:hover
+    background-image: none
+    background-color: $darkblue
+
+.controls
+  textarea
+    width: 100%
+    max-width: 26.5em
+
+.mesenlogo
+  float: right
+
+.popover
+  width: 300px
+
+.admin-login
+  background-color: $blue
+  h1
+    padding-top: 1em
+    color: $grey
+    font-weight: 100
+  header
+    .row
+      text-align: center
+      .alert.span7
+        float: none
+        margin-left: auto
+        margin-right: auto
+        width: 275px
+        text-align: left
+
+  .main-content
+    text-align: center
+    .login-dialog
+      @include border-radius(5px, 5px)
+      +animate(bounceInDown, 0.5s, 1s)
+      background-color: $white
+      padding: 2em
+      width: 225px
+      margin-left: auto
+      margin-right: auto
+      text-align: left
+      .btn-primary
+        margin-top: 2em
+  footer
+    text-align: right
+    padding-top: 2em
+    color: $grey
