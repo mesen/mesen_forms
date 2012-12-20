@@ -137,7 +137,7 @@ module MesenForms
 
     def help_block string
       content_tag :p, class: 'help-block' do
-        I18n.t string, :scope => [:activerecord, :help_strings, @template.controller_name.singularize]
+        I18n.t(string, :scope => [:activerecord, :help_strings, @template.controller_name.singularize]).html_safe
       end
     end
 
