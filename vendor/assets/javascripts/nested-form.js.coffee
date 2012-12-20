@@ -84,7 +84,12 @@ class NestedForm
     this.j_el.parent().find('.add_fields').bind('click', (event) ->
       time = new Date().getTime()
       regexp = new RegExp($(this).data('id'), 'g')
+
+      console.log $(this).data('fields').replace(regexp, time)
+      console.log $(this).data('.fields').find('.auto-increment')
+
       $(this).parent().find('.fields-wrapper').append($(this).data('fields').replace(regexp, time))
+
       $(this).parent().find('.fields-wrapper').find('.empty-list').hide()
       fields_wrapper = $(this).parent().find('.fields-wrapper')
       nested_form.set_directional_button_ability(fields_wrapper)
