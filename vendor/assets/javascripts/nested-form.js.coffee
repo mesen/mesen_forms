@@ -86,9 +86,6 @@ class NestedForm
       regexp = new RegExp($(this).data('id'), 'g')
 
       fields = $(this).data('fields').replace(regexp, time)
-      if $(fields).hasClass('auto-increment')
-        num_fields = $(this).parent().parent().find('.fields:visible').length
-        fields = $(this).data('fields').replace(/\[0\]/g,'[' + num_fields + ']').replace(/_0_/g,'[' + num_fields + ']')
 
       $(this).parent().find('.fields-wrapper').append(fields)
 
