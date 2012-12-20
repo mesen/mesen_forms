@@ -85,10 +85,12 @@ class NestedForm
       time = new Date().getTime()
       regexp = new RegExp($(this).data('id'), 'g')
 
-      console.log $(this).data('fields').replace(regexp, time)
-      console.log $(this).data('.fields').find('.auto-increment')
+      fields = $(this).data('fields').replace(regexp, time)
+      if $(fields).hasClass('auto-increment')
+        num_fields = $(this).parent().parent().find('.fields:visible').length
+        fields = $(this).data('fields').replace(/\[0\]/g,'[' + num_fields + ']').replace(/_0_/g,'[' + num_fields + ']')
 
-      $(this).parent().find('.fields-wrapper').append($(this).data('fields').replace(regexp, time))
+      $(this).parent().find('.fields-wrapper').append(fields)
 
       $(this).parent().find('.fields-wrapper').find('.empty-list').hide()
       fields_wrapper = $(this).parent().find('.fields-wrapper')
