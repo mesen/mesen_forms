@@ -46,7 +46,7 @@ module MesenForms
         options.reverse_merge!({:show_delete => true,
                                 :title_column => 'title',
                                 :admin_path => url_for([:admin, object]),
-                                :object_path => object.slug == 'forsiden' ? '/' : url_for(object),
+                                :object_path => object.slug == 'forsiden' ? '/' : (Rails.application.routes.recognize_path(url_for(object), :method => :get) ? url_for(object) : nil),
                                 :objects_string => I18n.t(object.class.name.underscore.pluralize, :scope => [:activerecord,:models]),
                                 :edit_path => url_for([:admin, object.class])})
   
