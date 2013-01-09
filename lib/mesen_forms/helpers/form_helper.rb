@@ -37,11 +37,6 @@ module MesenForms
       end
   
       def meta_info(object, options = {})
-
-        puts '---------BFORE---------'
-        puts options[:object_path]
-        puts '-----------------------'
-
         # defaults
         options.reverse_merge!({:show_delete => true,
                                 :title_column => 'title',
@@ -49,10 +44,6 @@ module MesenForms
                                 :object_path => object.slug == 'forsiden' ? '/' : (Rails.application.routes.recognize_path(url_for(object), :method => :get) ? url_for(object) : nil),
                                 :objects_string => I18n.t(object.class.name.underscore.pluralize, :scope => [:activerecord,:models]),
                                 :edit_path => url_for([:admin, object.class])})
-  
-        puts '---------AFTER---------'
-        puts options[:object_path]
-        puts '-----------------------'
 
         content_tag(:table, :class => 'table table-condensed meta-info') do
           content_tag(:tr) do
