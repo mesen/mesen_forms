@@ -4,7 +4,7 @@ module MesenForms
       def mesen_form_for (object, options = {}, &block)
         options[:builder] = FormBuilder
         options[:url]     = { :action => object.id.nil? ? "create" : "update"}
-        options[:html]    = {:class => 'form-horizontal'}
+        options[:html]    = { :class => 'form-horizontal' }
         form_for(object, options, &block)
       end
 
@@ -41,10 +41,10 @@ module MesenForms
         options.reverse_merge!({:show_delete => true,
                                 :title_column => 'title',
                                 :admin_path => url_for([:admin, object]),
-                                :object_path => object.slug == 'forsiden' ? '/' : url_for(object),
+                                :object_path => object.slug == 'forsiden' ? '/' : (Rails.application.routes.recognize_path(url_for(object), :method => :get) ? url_for(object) : nil),
                                 :objects_string => I18n.t(object.class.name.underscore.pluralize, :scope => [:activerecord,:models]),
                                 :edit_path => url_for([:admin, object.class])})
-  
+
         content_tag(:table, :class => 'table table-condensed meta-info') do
           content_tag(:tr) do
             content_tag(:td, I18n.t(:last_updated, :scope => [:layouts, :admin])) +

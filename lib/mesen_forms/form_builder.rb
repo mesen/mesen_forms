@@ -2,7 +2,7 @@ module MesenForms
   class FormBuilder < ::ActionView::Helpers::FormBuilder
     delegate :content_tag, :tag, :button_tag, :submit_tag, :link_to, :current_user, :link_to_add_fields, :render, :to => :@template
     
-    %w[text_area text_field email_field telephone_field url_field password_field collection_select].each do |method_name|
+    %w[text_area text_field email_field telephone_field url_field password_field select collection_select].each do |method_name|
       define_method(method_name) do |attribute, *options|
         *old_opts = *options
         opts = options.extract_options!
@@ -139,7 +139,7 @@ module MesenForms
 
     def help_block string
       content_tag :p, class: 'help-block' do
-        I18n.t string, :scope => [:activerecord, :help_strings, @template.controller_name.singularize]
+        I18n.t(string, :scope => [:activerecord, :help_strings, @template.controller_name.singularize]).html_safe
       end
     end
 

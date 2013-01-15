@@ -1,3 +1,3 @@
 module MesenForms
-  VERSION = "0.0.41"
+  VERSION = "0.0.50"
 end
