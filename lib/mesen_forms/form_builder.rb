@@ -80,7 +80,9 @@ module MesenForms
         controls do
           content_tag(:label, :class => 'checkbox') do
             super+
-            I18n.t(options[:longdesc], :scope => [:activerecord, :attributes, @template.controller_name.singularize])
+            if options[:longdesc]
+              I18n.t(options[:longdesc], :scope => [:activerecord, :attributes, @template.controller_name.singularize])
+            end
           end+
           if options[:help]
             help_block options[:help]
