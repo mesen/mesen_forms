@@ -15,4 +15,6 @@ $(document).ready(
 )
 
 window.bind_datepicker = (selector, date_format) ->
-  $('.datepicker').datepicker({weekStart: 1})
+  if (date_format == undefined)
+    date_format = 'yy-mm-dd'
+  $('.datepicker').datepicker({weekStart: 1, dateFormat: date_format})
