@@ -82,6 +82,7 @@ class NestedForm
   bind_add_button: () ->
     nested_form = this
     this.j_el.parent().find('.add_fields').bind('click', (event) ->
+      event.preventDefault()
       time = new Date().getTime()
       regexp = new RegExp($(this).data('id'), 'g')
 
@@ -96,7 +97,6 @@ class NestedForm
       nested_form.set_order_num(fields_wrapper)
       nested_form.bind_remove_buttons()
       window.bind_datepicker('.datepicker')
-      event.preventDefault()
     )
 
 $(document).ready(
