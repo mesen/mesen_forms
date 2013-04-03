@@ -81,7 +81,7 @@ module MesenForms
             end
           end+
           if options[:render]
-            link_to_add_fields(I18n.t('add_' + options[:render], :scope => [:layouts, :admin]), self, attribute)
+            link_to_add_fields(I18n.t('add_' + options[:render], :scope => [:layouts, :admin]), self, options[:render])
           else
             link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)
           end+
