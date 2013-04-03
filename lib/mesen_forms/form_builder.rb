@@ -68,7 +68,7 @@ module MesenForms
             fields_for(attribute) do |field|
               if options[:render]
                 puts "add render option"
-                render(options[:render], :f => field)
+                render(options[:render])
               else
                 puts "normal render"
                 render(attribute.to_s.singularize + '_fields', :f => field)
