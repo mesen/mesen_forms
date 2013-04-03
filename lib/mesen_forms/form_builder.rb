@@ -58,6 +58,8 @@ module MesenForms
 
     def nested_form(attribute, options={})
       puts ":::::::::"
+      puts options
+      puts "_____"
       puts options[:render]
       control_group do
         label(attribute, class: 'control-label')+
