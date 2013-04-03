@@ -84,7 +84,7 @@ module MesenForms
             link_to_add_fields(I18n.t('add_' + options[:render], :scope => [:layouts, :admin]), self, attribute)+
           else
             link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)+
-          end+
+          end
           if options[:help]
             help_block options[:help]
           end
