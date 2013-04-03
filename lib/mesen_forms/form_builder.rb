@@ -67,14 +67,24 @@ module MesenForms
           content_tag(:div, :class => 'well fields-wrapper') do
             fields_for(attribute) do |field|
               if options[:render]
+                puts "add render option"
                 render(options[:render], :f => field)
               else
+                puts "normal render"
                 render(attribute.to_s.singularize + '_fields', :f => field)
               end
             end+
-            content_tag(:div, I18n.t("no_" + attribute.to_s, :scope => [:layouts, :admin]).html_safe, class: ('hidden' if object.instance_eval(attribute.to_s).any?))
+            if options[:render]
+              content_tag(:div, I18n.t("no_" + options[:render], :scope => [:layouts, :admin]).html_safe, class: ('hidden' if object.instance_eval(attribute.to_s).any?))
+            else
+              content_tag(:div, I18n.t("no_" + attribute.to_s, :scope => [:layouts, :admin]).html_safe, class: ('hidden' if object.instance_eval(attribute.to_s).any?))
+            end
           end+
-          link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)+
+          if options[:render]
+            link_to_add_fields(I18n.t('add_' + options[:render], :scope => [:layouts, :admin]), self, attribute)+
+          else
+            link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute)+
+          end
           if options[:help]
             help_block options[:help]
           end
