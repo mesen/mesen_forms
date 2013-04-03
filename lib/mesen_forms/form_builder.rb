@@ -57,20 +57,14 @@ module MesenForms
     end
 
     def nested_form(attribute, options={})
-      puts ":::::::::"
-      puts options
-      puts "_____"
-      puts options[:render]
       control_group do
         label(attribute, class: 'control-label')+
         controls do
           content_tag(:div, :class => 'well fields-wrapper') do
             fields_for(attribute) do |field|
               if options[:render]
-                puts "add render option"
                 render(options[:render])
               else
-                puts "normal render"
                 render(attribute.to_s.singularize + '_fields', :f => field)
               end
             end+
