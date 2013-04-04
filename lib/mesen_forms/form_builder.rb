@@ -63,7 +63,7 @@ module MesenForms
           content_tag(:div, :class => 'well fields-wrapper') do
             fields_for(attribute) do |field|
               if options[:render]
-                render(options[:render])
+                render(options[:render], :f => field)
               else
                 render(attribute.to_s.singularize + '_fields', :f => field)
               end
