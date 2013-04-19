@@ -219,7 +219,7 @@ module MesenForms
             puts "no admin"
             if object.class.to_s != "Location"
               puts "not location"
-              c = submit_tag pub_btn_txt, :name => 'draft', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
+              c = submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
             end
           end
         end
