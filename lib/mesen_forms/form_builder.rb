@@ -188,6 +188,41 @@ module MesenForms
       end
     end
 
+
+  def form_action2s options={}
+    content_tag :div, :class => 'form-actions' do
+      puts current_user
+      if current_user
+        if (defined? object.is_published) && (object.id) && (object.is_published == true)
+          pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
+        elsif (!defined? object.is_published) && object.id
+          pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
+        elsif (!defined? object.is_published) && !object.id
+          pub_btn_txt = I18n.t :create, :scope => [:layouts, :admin]
+        else
+          pub_btn_txt = I18n.t :publish, :scope => [:layouts, :admin]
+        end
+        c = submit_tag pub_btn_txt, :name => 'submit', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
+        c << ' '
+        # you can not save a published object as a draft
+        if (defined? object.is_published) && ((object.id.nil? == true))
+          c << submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
+        elsif (defined? object.is_published) && (object.is_published == false) && (object.id.nil? == false)
+          c << submit_tag(I18n.t(:save_changes_in_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
+        end
+        c
+      else
+        if (object.id.nil? == true)
+          pub_btn_txt = I18n.t :save, :scope => [:layouts, :admin]
+        else
+          pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
+        end
+        c = submit_tag pub_btn_txt, :name => 'draft', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
+      end
+      # c += submit_tag I18n.t(:preview, :scope => [:layouts, :admin]), :name => 'preview', :class => 'btn pull-right'
+    end
+  end
+
   def localized_text_field(attribute, options={})
     default_attr  = attribute.to_s<<'_'<<I18n.default_locale.to_s
     locales       = ['en','de']
