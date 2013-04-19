@@ -192,6 +192,7 @@ module MesenForms
   def form_action2s options={}
     content_tag :div, :class => 'form-actions' do
       puts current_user
+
       if current_user
         if (defined? object.is_published) && (object.id) && (object.is_published == true)
           pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
@@ -210,6 +211,14 @@ module MesenForms
         elsif (defined? object.is_published) && (object.is_published == false) && (object.id.nil? == false)
           c << submit_tag(I18n.t(:save_changes_in_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
         end
+        # c
+        if User.method_defined? :is_admin
+          if current_user.is_admin == false
+            if object.class.to_s != "Location"
+              c = submit_tag pub_btn_txt, :name => 'draft', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
+            end
+          end
+        end
         c
       else
         if (object.id.nil? == true)
@@ -219,6 +228,7 @@ module MesenForms
         end
         c = submit_tag pub_btn_txt, :name => 'draft', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
       end
+
       # c += submit_tag I18n.t(:preview, :scope => [:layouts, :admin]), :name => 'preview', :class => 'btn pull-right'
     end
   end
