@@ -190,6 +190,7 @@ module MesenForms
 
 
   def form_action2s options={}
+    puts "sdjfksjdflkjslkjsdlsdjflskdjf"
     content_tag :div, :class => 'form-actions' do
       puts current_user
 
@@ -213,8 +214,11 @@ module MesenForms
         end
         # c
         if User.method_defined? :is_admin
+          puts "is admin exists"
           if current_user.is_admin == false
+            puts "no admin"
             if object.class.to_s != "Location"
+              puts "not location"
               c = submit_tag pub_btn_txt, :name => 'draft', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
             end
           end
