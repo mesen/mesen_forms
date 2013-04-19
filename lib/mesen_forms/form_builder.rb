@@ -221,7 +221,11 @@ module MesenForms
               puts "not location"
               c = submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
             end
+          else
+            c
           end
+        else
+          c
         end
         c
       else
