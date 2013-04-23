@@ -189,7 +189,7 @@ module MesenForms
     end
 
 
-  def form_action2s options={}
+  def form_actions2 options={}
     puts "sdjfksjdflkjslkjsdlsdjflskdjf"
     content_tag :div, :class => 'form-actions' do
       puts current_user
@@ -213,13 +213,20 @@ module MesenForms
           c << submit_tag(I18n.t(:save_changes_in_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
         end
         # c
+
+        # If the User is not an admin, he should not able to publish things, instead of loacations
         if User.method_defined? :is_admin
           puts "is admin exists"
           if current_user.is_admin == false
             puts "no admin"
             if object.class.to_s != "Location"
               puts "not location"
-              c = submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
+              #c = submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
+              if (defined? object.is_published) && ((object.id.nil? == true))
+                c << submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
+              elsif (defined? object.is_published) && (object.is_published == false) && (object.id.nil? == false)
+                c << submit_tag(I18n.t(:save_changes_in_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
+              end
             end
           else
             c
