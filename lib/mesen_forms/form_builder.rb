@@ -218,7 +218,7 @@ module MesenForms
         if User.method_defined? :is_admin # "is admin exists"
           if current_user.is_admin == false # "no admin"
             if object.class.to_s != "Location"
-              if (defined? object.is_published) && ((object.id.nil? == true)
+              if (defined? object.is_published) && ((object.id.nil? == true))
                 c = submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
               elsif (defined? object.is_published) && (object.is_published == false) && (object.id.nil? == false)
                 c = submit_tag(I18n.t(:save_changes, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
