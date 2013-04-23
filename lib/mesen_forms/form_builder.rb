@@ -155,41 +155,41 @@ module MesenForms
       end
     end
 
-    def form_actions options={}
-      content_tag :div, :class => 'form-actions' do
-        if current_user
-          if (defined? object.is_published) && (object.id) && (object.is_published == true)
-            pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
-          elsif (!defined? object.is_published) && object.id
-            pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
-          elsif (!defined? object.is_published) && !object.id
-            pub_btn_txt = I18n.t :create, :scope => [:layouts, :admin]
-          else
-            pub_btn_txt = I18n.t :publish, :scope => [:layouts, :admin]
-          end
-          c = submit_tag pub_btn_txt, :name => 'submit', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
-          c << ' '
-          # you can not save a published object as a draft
-          if (defined? object.is_published) && ((object.id.nil? == true))
-            c << submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
-          elsif (defined? object.is_published) && (object.is_published == false) && (object.id.nil? == false)
-            c << submit_tag(I18n.t(:save_changes_in_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
-          end
-          c
-        else
-          if (object.id.nil? == true)
-            pub_btn_txt = I18n.t :save, :scope => [:layouts, :admin]
-          else
-            pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
-          end
-          c = submit_tag pub_btn_txt, :name => 'draft', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
-        end
-        # c += submit_tag I18n.t(:preview, :scope => [:layouts, :admin]), :name => 'preview', :class => 'btn pull-right'
-      end
-    end
+    # def form_actions options={}
+    #   content_tag :div, :class => 'form-actions' do
+    #     if current_user
+    #       if (defined? object.is_published) && (object.id) && (object.is_published == true)
+    #         pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
+    #       elsif (!defined? object.is_published) && object.id
+    #         pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
+    #       elsif (!defined? object.is_published) && !object.id
+    #         pub_btn_txt = I18n.t :create, :scope => [:layouts, :admin]
+    #       else
+    #         pub_btn_txt = I18n.t :publish, :scope => [:layouts, :admin]
+    #       end
+    #       c = submit_tag pub_btn_txt, :name => 'submit', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
+    #       c << ' '
+    #       # you can not save a published object as a draft
+    #       if (defined? object.is_published) && ((object.id.nil? == true))
+    #         c << submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
+    #       elsif (defined? object.is_published) && (object.is_published == false) && (object.id.nil? == false)
+    #         c << submit_tag(I18n.t(:save_changes_in_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
+    #       end
+    #       c
+    #     else
+    #       if (object.id.nil? == true)
+    #         pub_btn_txt = I18n.t :save, :scope => [:layouts, :admin]
+    #       else
+    #         pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
+    #       end
+    #       c = submit_tag pub_btn_txt, :name => 'draft', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
+    #     end
+    #     # c += submit_tag I18n.t(:preview, :scope => [:layouts, :admin]), :name => 'preview', :class => 'btn pull-right'
+    #   end
+    # end
 
 
-  def form_actions2 options={}
+  def form_actions options={}
     puts "sdjfksjdflkjslkjsdlsdjflskdjf"
     content_tag :div, :class => 'form-actions' do
       puts current_user
@@ -214,15 +214,11 @@ module MesenForms
         end
         # c
 
-        # If the User is not an admin, he should not able to publish things, instead of loacations
-        if User.method_defined? :is_admin
-          puts "is admin exists"
-          if current_user.is_admin == false
-            puts "no admin"
+        # If the User is not an admin, he should not be able to publish things, instead of locations
+        if User.method_defined? :is_admin # "is admin exists"
+          if current_user.is_admin == false # "no admin"
             if object.class.to_s != "Location"
-              puts "not location"
-              #c = submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
-              if (defined? object.is_published) && ((object.id.nil? == true))
+              if (defined? object.is_published) && ((object.id.nil? == true)
                 c = submit_tag(I18n.t(:save_as_draft, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
               elsif (defined? object.is_published) && (object.is_published == false) && (object.id.nil? == false)
                 c = submit_tag(I18n.t(:save_changes, :scope => [:layouts, :admin]), :name => 'draft', :class => 'btn', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])})
