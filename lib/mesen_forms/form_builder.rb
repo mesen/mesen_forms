@@ -192,6 +192,7 @@ module MesenForms
   def form_actions2 options={}
     content_tag :div, :class => 'form-actions' do
       #<div class="form-actions"><input type="submit" value="Lagre endringer" name="submit" data-loading-text="Lagrer …" class="btn btn-primary"> </div>
+        pub_btn_txt = I18n.t :save_changes, :scope => [:layouts, :admin]
        c = submit_tag pub_btn_txt, :name => 'submit', :class => 'btn btn-primary', :data => {'loading-text' => I18n.t(:saving, :scope => [:layouts, :admin])}
     end
   end
