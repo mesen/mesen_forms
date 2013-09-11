@@ -104,11 +104,11 @@ module MesenForms
     end
 
 
-    def radio_box(attribute, options={})
+    def radio(attribute, options={})
       control_group do
         label(attribute, class: 'control-label')+
         controls do
-          content_tag(:label, :class => 'radiobox') do
+          content_tag(:label, :class => 'radio') do
             super+
             if options[:longdesc]
               I18n.t(options[:longdesc], :scope => [:activerecord, :attributes, @template.controller_name.singularize])
