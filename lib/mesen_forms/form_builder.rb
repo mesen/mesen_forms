@@ -103,24 +103,6 @@ module MesenForms
       end
     end
 
-
-    def radio(attribute, options={})
-      control_group do
-        label(attribute, class: 'control-label')+
-        controls do
-          content_tag(:label, :class => 'radio') do
-            super+
-            if options[:longdesc]
-              I18n.t(options[:longdesc], :scope => [:activerecord, :attributes, @template.controller_name.singularize])
-            end
-          end+
-          if options[:help]
-            help_block options[:help]
-          end
-        end
-      end
-    end
-
     def datetime_select(attribute, options={})
       control_group do
         label(attribute, class: 'control-label')+
