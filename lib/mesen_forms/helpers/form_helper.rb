@@ -61,7 +61,7 @@ module MesenForms
           if options[:show_delete]
             content_tag(:tr) do
               content_tag(:td, I18n.t(:delete, :scope => [:layouts, :admin]))+
-              content_tag(:td, link_to(I18n.t(:delete, :scope => [:layouts, :admin]), options[:admin_path], data: { confirm: => I18n.t(:delete_confirmation, :scope => [:layouts, :admin], :title => object.instance_eval(options[:title_column]))}, :method => :delete, :class => "btn btn-danger btn-mini"))
+              content_tag(:td, link_to(I18n.t(:delete, :scope => [:layouts, :admin]), options[:admin_path], :data => { confirm: => I18n.t(:delete_confirmation, :scope => [:layouts, :admin], :title => object.instance_eval(options[:title_column]))}, :method => :delete, :class => "btn btn-danger btn-mini"))
             end
           end
         end+
