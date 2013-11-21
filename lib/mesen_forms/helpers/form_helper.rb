@@ -4,7 +4,7 @@ module MesenForms
       def mesen_form_for (object, options = {}, &block)
         options[:builder] = FormBuilder
         options[:url]     = { :action => object.id.nil? ? "create" : "update"}
-        options[:html]    = { :class => 'form-horizontal', :id => 'media_file_uploader', :remote => true, :format == 'js' }
+        options[:html]    = { :class => 'form-horizontal', :id => 'media_file_uploader', :remote => true, :format => 'js' }
         form_for(object, options, &block)
       end
 
