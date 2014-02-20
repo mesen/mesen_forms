@@ -16,12 +16,22 @@ module MesenForms
         content_tag(:li, content_tag(:a, I18n.t(title, :scope => [:admin, controller_name]), :href => url), :class => ('active' if current_page?(url)))
       end
   
+      # If the user is deleted who updated this object: updated_by =nil
       def update_info(object)
-        who_when object.updated_by, object.updated_at
+        begin
+          who_when object.updated_by, object.updated_at
+        rescue
+          who_when nil, object.updated_at
+        end
       end
   
+      # If the user is deleted who created this object: created_by =nil
       def create_info(object)
-        who_when object.created_by, object.created_at
+        begin
+          who_when object.created_by, object.created_at
+        rescue
+          who_when nil, object.created_at
+        end
       end
   
       def who_when(user_id,at)
@@ -36,12 +46,21 @@ module MesenForms
         str
       end
   
+      # Information about an object:
+      # object_path: Addresse, link to show the object 
+      # objects_string: String for: Vis alle 'objects_string'
       def meta_info(object, options = {})
         # defaults
+        begin
+          object_path = url_for(object)
+        rescue 
+          object_path = options[:object_path]
+        end
+
         options.reverse_merge!({:show_delete => true,
                                 :title_column => 'title',
                                 :admin_path => url_for([:admin, object]),
-                                :object_path => object.slug == 'forsiden' ? '/' : (Rails.application.routes.recognize_path(url_for(object), :method => :get) ? url_for(object) : nil),
+                                :object_path => object.slug == 'forsiden' ? '/' : (Rails.application.routes.recognize_path(object_path, :method => :get) ? object_path : nil),
                                 :objects_string => I18n.t(object.class.name.underscore.pluralize, :scope => [:activerecord,:models]),
                                 :edit_path => url_for([:admin, object.class])})
 
