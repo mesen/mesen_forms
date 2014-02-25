@@ -18,27 +18,24 @@ module MesenForms
   
       # If the user is deleted who updated this object: updated_by =nil
       def update_info(object)
-        begin
-          who_when object.updated_by, object.updated_at
-        rescue
-          who_when nil, object.updated_at
-        end
+        who_when object.updated_by, object.updated_at
       end
   
       # If the user is deleted who created this object: created_by =nil
       def create_info(object)
-        begin
-          who_when object.created_by, object.created_at
-        rescue
-          who_when nil, object.created_at
-        end
+        who_when object.created_by, object.created_at
       end
   
       def who_when(user_id,at)
         str = relative_or_absolute_date(at)
         if user_id
-          user_obj = User.find(user_id)
-          user = user_obj.fullname
+          begin
+            user_obj = User.find(user_id)
+            user = user_obj.fullname
+          rescue
+            user_obj = nil
+            user = nil
+          end
           if !user.blank?
             str = I18n.t(:created_at_by, :scope => [:layouts, :admin], :time => str, :username => user)
           end
