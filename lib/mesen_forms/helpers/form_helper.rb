@@ -54,15 +54,9 @@ module MesenForms
           object_path = options[:object_path]
         end
 
-        if options[:admin_path]
-          admin_path = options[:admin_path]
-        else
-          admin_path = url_for([:admin, object])
-        end
-
         options.reverse_merge!({:show_delete => true,
                                 :title_column => 'title',
-                                :admin_path => admin_path,
+                                :admin_path => url_for([:admin, object]),
                                 :object_path => object.slug == 'forsiden' ? '/' : (Rails.application.routes.recognize_path(object_path, :method => :get) ? object_path : nil),
                                 :objects_string => I18n.t(object.class.name.underscore.pluralize, :scope => [:activerecord,:models]),
                                 :edit_path => url_for([:admin, object.class])})
