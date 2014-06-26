@@ -46,6 +46,7 @@ module MesenForms
       # Information about an object:
       # object_path: Addresse, link to show the object 
       # objects_string: String for: Vis alle 'objects_string'
+      # show_delete => false: Don't show the delete button
       def meta_info(object, options = {})
         # defaults
         begin
