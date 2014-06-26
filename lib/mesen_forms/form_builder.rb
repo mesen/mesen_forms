@@ -304,9 +304,7 @@ module MesenForms
         if options[:cktext]
           cktext_area(default_attr.to_sym, :rows => (options[:rows] ?  options[:rows] : 5), :toolbar => options[:cktext], :width => 322, :height => (options[:height] ? options[:height] : 200), :js_content_for => :ckeditor_js)
         else
-          unless options[:class] == 'ckeditor cklarge'
-            text_area(default_attr.to_sym, :rows => (options[:rows] ?  options[:rows] : 5), :class => 'input-large', :skip_label => true)
-          end
+          text_area(default_attr.to_sym, :rows => (options[:rows] ?  options[:rows] : 5), :class => 'input-large', :skip_label => true)
         end+
         if options[:help]
           help_block options[:help]
