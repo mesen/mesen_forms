@@ -1,13 +1,14 @@
 class NestedForm
   constructor: (@selector) ->
     # the jquery element should be the field_wrapper
-    this.j_el = $(selector)
+    if ($(selector).length)
+      this.j_el = $(selector)
     if (this.j_el).length > 0
       this.bind_directional_buttons()
       this.set_directional_button_ability()
       this.bind_add_button()
       this.bind_remove_buttons()
-      
+
 
   set_directional_button_ability: () ->
     num_fields = this.j_el.find('.fields:visible').length
@@ -73,7 +74,7 @@ class NestedForm
       num_fields = fields_wrapper.find('.fields:visible').length
       nested_form.set_directional_button_ability(fields_wrapper)
       nested_form.set_order_num(fields_wrapper)
-      
+
       if num_fields < 1
         fields_wrapper.find('.empty-list').show()
       event.preventDefault()
