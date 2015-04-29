@@ -1,8 +1,7 @@
 class NestedForm
   constructor: (@selector) ->
     # the jquery element should be the field_wrapper
-    if ($(selector).length)
-      this.j_el = $(selector)
+    this.j_el = $(selector)
     if (this.j_el).length > 0
       this.bind_directional_buttons()
       this.set_directional_button_ability()
