@@ -82,7 +82,11 @@ module MesenForms
             end
           end
         end+
-        link_to(I18n.t(:show_all, :scope => [:layouts, :admin]) + ' ' + options[:objects_string], options[:edit_path], :class => "btn")
+        if options[:objects_string_path]
+          link_to(I18n.t(:show_all, :scope => [:layouts, :admin]) + ' ' + options[:objects_string], options[:objects_string_path], :class => "btn")
+        else
+          link_to(I18n.t(:show_all, :scope => [:layouts, :admin]) + ' ' + options[:objects_string], options[:edit_path], :class => "btn")
+        end
       end
   
       def publish_status(object)
