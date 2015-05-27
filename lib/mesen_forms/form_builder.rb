@@ -56,6 +56,7 @@ module MesenForms
       end
     end
 
+    # Add this to nested form in forms, so there will not be an add button: :add_field => false
     def nested_form(attribute, options={})
       control_group do
         label(attribute, class: 'control-label')+
@@ -74,10 +75,12 @@ module MesenForms
               content_tag(:div, I18n.t("no_" + attribute.to_s, :scope => [:layouts, :admin]).html_safe, class: ('hidden' if object.instance_eval(attribute.to_s).any?))
             end
           end+
-          if options[:render]
-            link_to_add_fields(I18n.t('add_' + options[:render], :scope => [:layouts, :admin]), self, attribute, options[:render])
-          else
-            link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute, nil)
+          if options[:add_field] == false
+            if options[:render]
+              link_to_add_fields(I18n.t('add_' + options[:render], :scope => [:layouts, :admin]), self, attribute, options[:render])
+            else
+              link_to_add_fields(I18n.t('add_' + attribute.to_s.singularize, :scope => [:layouts, :admin]), self, attribute, nil)
+            end
           end+
           if options[:help]
             help_block options[:help]
