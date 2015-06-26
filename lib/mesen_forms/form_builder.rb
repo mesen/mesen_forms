@@ -131,10 +131,6 @@ module MesenForms
       end
     end
 
-    def number_field_tag(attribute, options={})
-      label(attribute) + super
-    end
-
     def map_input(attribute, options={})
       control_group do
         label(attribute, class: 'control-label')+
