@@ -135,10 +135,7 @@ module MesenForms
       control_group do
         label(attribute, class: 'control-label')+
         controls do
-          super+
-          if options[:help]
-            help_block options[:help]
-          end
+      
         end
       end
     end
